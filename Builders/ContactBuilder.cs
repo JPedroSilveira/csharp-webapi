@@ -1,6 +1,7 @@
 using System;
+using csharp_webapi.Entities;
 
-namespace csharp_webapi.Entities
+namespace csharp_webapi.Builders
 {
     public class ContactBuilder
     {

@@ -1,10 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using csharp_webapi.Entities;
+using csharp_webapi.Builders;
 
 namespace csharp_webapi.Services
 {
@@ -29,6 +25,10 @@ namespace csharp_webapi.Services
                 return this._data[id];
             }
             return null;
+        }
+
+        public void Save(Contact contact) {
+            _data.Add(_data.Count, contact);
         }
 
         private void PopulateData() {
@@ -68,10 +68,6 @@ namespace csharp_webapi.Services
             .Image("https://pbs.twimg.com/media/EzpNapNUcAE177N.jpg")
             .Desc("The master witch")
             .Pronous("She/her").Build());
-        }
-
-        private void Save(Contact contact) {
-            _data.Add(_data.Count, contact);
         }
     }
 }

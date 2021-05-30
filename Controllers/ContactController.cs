@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using csharp_webapi.Services;
 using csharp_webapi.Entities;
+using csharp_webapi.Models;
 
 namespace csharp_webapi.Controllers
 {
@@ -20,6 +21,7 @@ namespace csharp_webapi.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<Contact>), 200)]
         public ActionResult<IEnumerable<Contact>> GetAll()
         {
             _logger.LogInformation("get contact");
@@ -27,6 +29,8 @@ namespace csharp_webapi.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(Contact), 200)]
+        [ProducesResponseType(typeof(NotFoundResult), 404)]
         public ActionResult<Contact> GetById(int id)
         {
             var contact = _service.FindById(id);
@@ -37,6 +41,16 @@ namespace csharp_webapi.Controllers
 
             _logger.LogInformation($"get contact/{id} not found");
             return NotFound();
+        }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(EmptyResult), 200)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), 400)]
+        public ActionResult Save([FromBody] ContactModel model)
+        {
+            _logger.LogInformation("save contact");
+            _service.Save(model.ToContact());
+            return Ok();
         }
     }
 }

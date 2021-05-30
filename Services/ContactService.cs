@@ -33,6 +33,15 @@ namespace csharp_webapi.Services
             return newId;
         }
 
+        public bool Delete(int id) {
+            if (this._data.ContainsKey(id)) {
+                this._data.Remove(id);
+                return true;
+            }
+
+            return false;
+        }
+
         private void PopulateData() {
             Save(new ContactBuilder()
             .Name("MayMay").Number("51 3244 2133")

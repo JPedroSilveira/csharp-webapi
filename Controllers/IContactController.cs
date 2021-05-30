@@ -40,6 +40,6 @@ namespace csharp_webapi.Controllers
         /// if success returns empty http response ok,
         /// else returns http response not found
         /// </returns>
-        ActionResult<EmptyResult> Delete(int id);
+        ActionResult Delete(int id);
     }
 }

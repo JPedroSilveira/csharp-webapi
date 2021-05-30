@@ -13,9 +13,9 @@ namespace csharp_webapi.Controllers
     public class ContactController : ControllerBase, IContactController
     {
         private readonly ILogger<ContactController> _logger;
-        private readonly ContactService _service;
+        private readonly IContactService _service;
 
-        public ContactController(ILogger<ContactController> logger, ContactService service)
+        public ContactController(ILogger<ContactController> logger, IContactService service)
         {
             _logger = logger;
             _service = service;
@@ -55,9 +55,9 @@ namespace csharp_webapi.Controllers
         }
 
         [HttpDelete("{id}")]
-        [ProducesResponseType(typeof(EmptyResult), 200)]
+        [ProducesResponseType(typeof(OkResult), 200)]
         [ProducesResponseType(typeof(NotFoundResult), 404)]
-        public ActionResult<EmptyResult> Delete([Required] int id)
+        public ActionResult Delete([Required] int id)
         {
             var success = _service.Delete(id);
             if (success) {

@@ -28,5 +28,14 @@ namespace csharp_webapi.Services
         /// Returns the entity id
         /// </returns>
         int Save(Contact contact);
+
+        
+        /// <summary>
+        /// Delete a contact by it's id
+        /// </summary>
+        /// <returns>
+        /// Returns true for success or false for failure
+        /// </returns>
+        bool Delete(int id);
     }
 }

@@ -9,7 +9,7 @@ namespace csharp_webapi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ContactController : ControllerBase
+    public class ContactController : ControllerBase, IContactController
     {
         private readonly ILogger<ContactController> _logger;
         private readonly ContactService _service;
@@ -44,13 +44,13 @@ namespace csharp_webapi.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(EmptyResult), 200)]
+        [ProducesResponseType(typeof(int), 200)]
         [ProducesResponseType(typeof(ValidationProblemDetails), 400)]
-        public ActionResult Save([FromBody] ContactModel model)
+        public ActionResult<int> Save([FromBody] ContactModel model)
         {
             _logger.LogInformation("save contact");
-            _service.Save(model.ToContact());
-            return Ok();
+            var newId = _service.Save(model.ToContact());
+            return Ok(newId);
         }
     }
 }

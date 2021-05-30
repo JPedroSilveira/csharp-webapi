@@ -4,7 +4,7 @@ using csharp_webapi.Builders;
 
 namespace csharp_webapi.Services
 {
-    public class ContactService
+    public class ContactService : IContactService
     {
         private readonly Dictionary<int, Contact> _data;
 
@@ -27,8 +27,10 @@ namespace csharp_webapi.Services
             return null;
         }
 
-        public void Save(Contact contact) {
-            _data.Add(_data.Count, contact);
+        public int Save(Contact contact) {
+            var newId = _data.Count;
+            _data.Add(newId, contact);
+            return newId;
         }
 
         private void PopulateData() {

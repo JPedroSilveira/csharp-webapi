@@ -26,7 +26,7 @@ namespace csharp_webapi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ContactService>();
+            services.AddSingleton<IContactService, ContactService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

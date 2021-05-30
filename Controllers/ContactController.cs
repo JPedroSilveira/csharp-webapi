@@ -32,7 +32,7 @@ namespace csharp_webapi.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Contact), 200)]
         [ProducesResponseType(typeof(NotFoundResult), 404)]
-        public ActionResult<Contact> GetById([Required] int id)
+        public ActionResult<Contact> GetById(int id)
         {
             var contact = _service.FindById(id);
             if (contact != null) {
@@ -55,14 +55,14 @@ namespace csharp_webapi.Controllers
         }
 
         [HttpDelete("{id}")]
-        [ProducesResponseType(typeof(OkResult), 200)]
+        [ProducesResponseType(typeof(NoContentResult), 200)]
         [ProducesResponseType(typeof(NotFoundResult), 404)]
-        public ActionResult Delete([Required] int id)
+        public ActionResult Delete(int id)
         {
             var success = _service.Delete(id);
             if (success) {
                 _logger.LogInformation($"delete contact {id}");
-                return Ok();
+                return NoContent();
             }
 
             _logger.LogInformation($"fail to delete contact {id}");

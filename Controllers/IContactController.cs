@@ -37,7 +37,7 @@ namespace csharp_webapi.Controllers
         /// Delete a contact by id
         /// </summary>
         /// <returns>
-        /// if success returns empty http response ok,
+        /// if success returns empty http response no content,
         /// else returns http response not found
         /// </returns>
         ActionResult Delete(int id);

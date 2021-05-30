@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using csharp_webapi.Services;
@@ -10,6 +11,8 @@ namespace csharp_webapi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [EnableCors("AllowAll")]
+    [Authorize]
     public class ContactController : ControllerBase, IContactController
     {
         private readonly ILogger<ContactController> _logger;
